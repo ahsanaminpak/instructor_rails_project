@@ -36,6 +36,8 @@
     <%= f.text_field :bio, autocomplete: "new-bio" %>
   </div>
 
+  <%= f.select(:account_type, {student: 1, instructor: 2} )%>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
