@@ -1,0 +1,21 @@
+<h1>Review#show</h1>
+<p>Find me in app/views/review/show.html.erb</p>
+
+Review_id:<%= @review.id%><br>
+
+Content of Review:<%= @review.body%><br>
+
+User_id of reviewer:<%= @review.user_id%><br>
+
+<%= link_to "Edit", edit_review_path(@review.id)%><br>
+
+<%# <%= link_to "Delete", review_path(@review.id), method: :delete %>
+
+
+
+
+<%= form_for(:review, url: review_path(@review), method: :delete) do |f| %>
+  <div class="actions">
+    <%= f.submit "Delete review" %>
+  </div>
+<% end %>

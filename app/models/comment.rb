@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-    attr_accessible :body
+    # attr_accessor :body
 
     
     belongs_to :user

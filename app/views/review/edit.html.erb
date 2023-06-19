@@ -1,1 +1,13 @@
 edit review
+
+<%= form_for(:review, url: review_path, method: :put) do |f| %>
+
+  <div class="field">
+    <%= f.label :review %><br />
+    <%= f.text_field :body, autocomplete: "new-review" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update review" %>
+  </div>
+<% end %>

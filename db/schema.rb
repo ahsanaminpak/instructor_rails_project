@@ -12,21 +12,21 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_06_19_031141) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "body"
+    t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "reviews_id"
-    t.bigint "users_id"
-    t.index ["reviews_id"], name: "index_comments_on_reviews_id"
-    t.index ["users_id"], name: "index_comments_on_users_id"
+    t.bigint "review_id"
+    t.bigint "user_id"
+    t.index ["review_id"], name: "index_comments_on_review_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "body"
+    t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "users_id"
-    t.index ["users_id"], name: "index_reviews_on_users_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -44,7 +44,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_031141) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "comments", "reviews", column: "reviews_id"
-  add_foreign_key "comments", "users", column: "users_id"
-  add_foreign_key "reviews", "users", column: "users_id"
 end

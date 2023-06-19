@@ -1,5 +1,5 @@
 class Review < ApplicationRecord
-    attr_accessible :body
+    # attr_accessor :users_id, :body
 
     belongs_to :user
     has_many :comments
