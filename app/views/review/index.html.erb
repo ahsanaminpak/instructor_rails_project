@@ -28,12 +28,14 @@ all reviews
 
 
 <%= button_to "Delete review", review_path(r.id), method: :delete %>
-<br><br>
+
 
 <%else%>
 reviewer ID: <%=r.user_id%><br>
 instructor name: <%=r.instructor_name%><br><br>
 review body: <%=r.body%><br><br>
 <%end%>
+
+<%= button_to "Show review", review_path(r.id), method: :get %><br><br>
 
 <%end%>

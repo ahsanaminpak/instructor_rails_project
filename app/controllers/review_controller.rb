@@ -20,8 +20,8 @@ class ReviewController < ApplicationController
     @review = current_user.reviews.new(:body => params[:review][:body], :instructor_name => params[:review][:instructor_name])
 
     if @review.save!
-      redirect_to @review
       flash.alert = "Review created successfully!"
+      redirect_to @review
     else
       flash.alert = "Review creation failed!"
       redirect_to new_review_path
@@ -36,10 +36,12 @@ class ReviewController < ApplicationController
     @review = Review.where(:id => params[:id]).first
     if @review.update(params.require(:review).permit(:body, :instructor_name))
       flash.alert = "Review updated successfully!"
-      redirect_to @review
+      redirect_back(fallback_location: @review)
+      # redirect_to @review
     else
       flash.alert = "Review update failed!"
-      redirect_to new_review_path
+      redirect_back(fallback_location: @review)
+      # redirect_to new_review_path
     end
 
   end
@@ -48,10 +50,12 @@ class ReviewController < ApplicationController
     @review = Review.where(:id => params[:id]).first
     if @review.destroy
       flash.alert = "Review deleted successfully!"
-      redirect_to new_review_path
+      # redirect_to new_review_path
+      redirect_back(fallback_location: new_review_path)
     else
       flash.alert = "Review deletion failed!"
-      redirect_to @review
+      # redirect_to @review
+      redirect_back(fallback_location: @review)
     end
   end
 

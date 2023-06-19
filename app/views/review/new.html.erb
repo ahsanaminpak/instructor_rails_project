@@ -1,4 +1,9 @@
 new review
+<% flash.first do |type, msg| %>
+  <div>
+    <%= type %>: <%= msg %>
+  </div>
+<% end %>
 
 <%= form_for(:review, url: review_index_path, method: :post) do |f| %>
 

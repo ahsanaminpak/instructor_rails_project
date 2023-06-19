@@ -28,5 +28,7 @@ my reviews
 
 
 <%= button_to "Delete review", review_path(r.id), method: :delete %>
+
+<%= button_to "Show review", review_path(r.id), method: :get %>
 <br><br>
 <%end%>
