@@ -1,4 +1,11 @@
 class CommentController < ApplicationController
-  def index
+  def create
   end
+
+  def update
+  end
+
+  def destroy
+  end
+  
 end

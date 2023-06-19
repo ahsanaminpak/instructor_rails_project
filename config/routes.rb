@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'comment/index'
+  # get 'comment/index'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'
@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
+
+  resources :review
+  resources :comment
 
   # root "devise/registrations#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
