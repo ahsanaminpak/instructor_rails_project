@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
-    before_action :logged_in_user
+    before_action :logged_in_user, unless: :devise_controller?
 
 
     def configure_permitted_parameters
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
     def logged_in_user
         unless !current_user.nil?
-           flash[:danger] = "Please log in."
+           flash[:error] = "Please log in."
            redirect_to new_user_session_path
         end
      end
