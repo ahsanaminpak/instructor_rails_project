@@ -21,7 +21,9 @@ class ReviewController < ApplicationController
 
     if @review.save!
       redirect_to @review
+      flash.alert = "Review created successfully!"
     else
+      flash.alert = "Review creation failed!"
       redirect_to new_review_path
     end
   end
@@ -32,9 +34,11 @@ class ReviewController < ApplicationController
 
   def update
     @review = Review.where(:id => params[:id]).first
-    if @review.update(params.require(:review).permit(:body))
+    if @review.update(params.require(:review).permit(:body, :instructor_name))
+      flash.alert = "Review updated successfully!"
       redirect_to @review
     else
+      flash.alert = "Review update failed!"
       redirect_to new_review_path
     end
 
@@ -43,8 +47,10 @@ class ReviewController < ApplicationController
   def destroy
     @review = Review.where(:id => params[:id]).first
     if @review.destroy
+      flash.alert = "Review deleted successfully!"
       redirect_to new_review_path
     else
+      flash.alert = "Review deletion failed!"
       redirect_to @review
     end
   end
@@ -62,7 +68,7 @@ class ReviewController < ApplicationController
 
   def check_instructor
     if current_user.account_type == 2
-      flash[:error] = "Please log in."
+      # flash[:error] = "Please log in."
       redirect_to authenticated_root_path
     end
   end

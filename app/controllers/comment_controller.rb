@@ -9,8 +9,10 @@ class CommentController < ApplicationController
     @comment = review.comments.new(:body => params[:comment][:body], :user_id => current_user.id)
 
     if @comment.save!
+      flash.alert = "Comment created successfully!"
       redirect_to review_path(params[:review_id])
     else
+      flash.alert = "Comment creation failed!"
       redirect_to new_review_path
     end
   end
@@ -18,8 +20,10 @@ class CommentController < ApplicationController
   def update
     comment = Comment.where(:id => params[:id]).first
     if comment.update(params.require(:comment).permit(:body))
+      flash.alert = "Comment updated successfully!"
       redirect_to review_path(params[:review_id])
     else
+      flash.alert = "Comment update failed!"
       redirect_to review_path(params[:review_id])
     end
 
@@ -29,8 +33,10 @@ class CommentController < ApplicationController
     comment = Comment.where(:id => params[:id]).first
 
     if comment.destroy
+      flash.alert = "Comment deleted successfully!"
       redirect_to review_path(params[:review_id])
     else
+      flash.alert = "Comment deletion failed!"
       redirect_to review_path(params[:review_id])
     end
   end

@@ -1,6 +1,13 @@
 <h1>Review#show</h1>
 <p>Find me in app/views/review/show.html.erb</p>
 
+<% flash.first do |type, msg| %>
+  <div class="alert alert-info">
+    <%= type %>: <%= msg %>
+  </div>
+<% end %>
+
+
 <%= button_to "Log out", destroy_user_session_path, method: :delete %><br><br>
 
 Review_id:<%= @review.id%><br>

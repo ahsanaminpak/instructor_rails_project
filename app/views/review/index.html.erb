@@ -1,5 +1,10 @@
 all reviews
 
+<% flash.first do |type, msg| %>
+  <div>
+    <%= type %>: <%= msg %>
+  </div>
+<% end %>
 
 
 <%@reviews.each do |r| %>

@@ -1,5 +1,11 @@
 my comments here
 
+<% flash.first do |type, msg| %>
+  <div>
+    <%= type %>: <%= msg %>
+  </div>
+<% end %>
+
 <%@comments.each do |c| %>
 
 <%= form_for(c, url: review_comment_path(c.review_id, c.id), method: :put) do |f| %>
