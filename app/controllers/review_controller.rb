@@ -17,7 +17,7 @@ class ReviewController < ApplicationController
   end
 
   def create
-    @review = current_user.reviews.new(:body => params[:review][:body])
+    @review = current_user.reviews.new(:body => params[:review][:body], :instructor_name => params[:review][:instructor_name])
 
     if @review.save!
       redirect_to @review

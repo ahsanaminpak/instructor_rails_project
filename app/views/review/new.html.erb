@@ -3,6 +3,11 @@ new review
 <%= form_for(:review, url: review_index_path, method: :post) do |f| %>
 
   <div class="field">
+    <%= f.label :instructor_name %><br />
+    <%= f.text_field :instructor_name, autocomplete: "new-instructor" %>
+  </div>
+
+  <div class="field">
     <%= f.label :review %><br />
     <%= f.text_field :body, autocomplete: "new-review" %>
   </div>
