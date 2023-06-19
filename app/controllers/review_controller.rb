@@ -1,7 +1,9 @@
 class ReviewController < ApplicationController
+  before_action :check_instructor, except: :index
+
+
   def index
     @reviews = Review.all
-
   end
 
   def my_reviews
@@ -54,6 +56,15 @@ class ReviewController < ApplicationController
 
     # @comment = Comment.new
     # @comment.review_id = @review.id
+  end
+
+  protected
+
+  def check_instructor
+    if current_user.account_type == 2
+      flash[:error] = "Please log in."
+      redirect_to authenticated_root_path
+    end
   end
 
 end
