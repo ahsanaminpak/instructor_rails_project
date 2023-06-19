@@ -1,0 +1,29 @@
+all reviews
+
+
+
+<%@reviews.each do |r| %>
+<%if r.user_id == current_user.id%>
+
+<%= form_for(r, url: review_path(r.id), method: :put) do |f| %>
+
+  <div class="field">
+    <%= f.label :review %><br />
+    review body: <%= f.text_field :body, autocomplete: "new-review" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Edit review" %>
+  </div>
+<% end %>
+
+
+<%= button_to "Delete review", review_path(r.id), method: :delete %>
+<br><br>
+
+<%else%>
+reviewer ID: <%=r.user_id%><br>
+review body: <%=r.body%><br><br>
+<%end%>
+
+<%end%>

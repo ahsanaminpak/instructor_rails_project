@@ -1,4 +1,15 @@
 class ReviewController < ApplicationController
+  def index
+    @reviews = Review.all
+
+  end
+
+  def my_reviews
+    @reviews = Review.where(:user_id => current_user.id)
+
+  end
+
+
   def new
     @review = Review.new
   end
@@ -38,6 +49,11 @@ class ReviewController < ApplicationController
 
   def show
     @review = Review.where(:id => params[:id]).first
+
+    @comments = @review.comments.to_a
+
+    # @comment = Comment.new
+    # @comment.review_id = @review.id
   end
 
 end

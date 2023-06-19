@@ -10,7 +10,12 @@ Bio: <%= current_user.bio%><br>
 
 
 
-<%= link_to 'Create Review', new_review_path, method: :get%>
+<%= link_to 'Create Review', new_review_path, method: :get%><br>
 
 
+<%= button_to "All reviews", review_index_path, method: :get %><br>
+
+<%= button_to "My reviews", review_my_reviews_path, method: :get %>
+
+<%= button_to "My comments", comment_my_comments_path, method: :get %>
 
