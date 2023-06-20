@@ -17,13 +17,40 @@ class ReviewController < ApplicationController
   end
 
   def create
+    # if  params[:review][:instructor_name] == ""
+    #   flash.alert = "Instructor name cannot be empty."
+    #   puts "here"
+    #   redirect_to new_review_path, notice: "Ins cannot be empty."
+    
+    # elsif params[:review][:body] == ""
+    #   flash.alert = "Review body cannot be empty."
+    #   redirect_to new_review_path
+    # end
+
     @review = current_user.reviews.new(:body => params[:review][:body], :instructor_name => params[:review][:instructor_name])
+
+    # if !@review.valid?
+    #   flash.alert = "All fields are required. Please fill them to continue."
+    # end
+
+    if @review.instructor_name == ""
+      flash.alert = @review.errors.full_messages[0]
+# 8     render :new
+      # flash.alert = "Instructor name cannot be empty."
+      puts "here"
+      redirect_to new_review_path, notice: "Ins cannot be empty."
+    
+    elsif @review.body == ""
+      flash.alert = "Review body cannot be empty."
+      redirect_to new_review_path
+    end
 
     if @review.save!
       flash.alert = "Review created successfully!"
       redirect_to @review
     else
       flash.alert = "Review creation failed!"
+      puts "something"
       redirect_to new_review_path
     end
   end
