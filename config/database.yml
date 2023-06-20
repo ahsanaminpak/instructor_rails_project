@@ -39,7 +39,7 @@ test:
 
 production:
   <<: *defaultprod
-  database: my-app-3030.mysql
+  database: reviews_app_1412
   # database: prodInstructorReviews
 
 
