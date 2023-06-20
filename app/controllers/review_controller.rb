@@ -62,7 +62,8 @@ class ReviewController < ApplicationController
       review_cache_key = @review.cache_key_with_version
       @review = Rails.cache.write("review/#{review_cache_key}", @review)
 
-      redirect_to @review
+      # redirect_to @review
+      redirect_to review_path(@review.id)
     else
       flash.alert = "Review creation failed!"
       puts "something"
