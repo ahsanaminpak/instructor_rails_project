@@ -72,3 +72,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "dalli", "~> 3.2"
+
+gem 'connection_pool'

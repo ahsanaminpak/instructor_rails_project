@@ -3,11 +3,22 @@ class ReviewController < ApplicationController
 
 
   def index
-    @reviews = Review.all
+    # @reviews = Review.all
+
+    review_cache_key = Review.all.cache_key_with_version
+    @reviews = Rails.cache.fetch("all_reviews/#{review_cache_key}") do
+      Review.all
+    end
+
   end
 
   def my_reviews
-    @reviews = Review.where(:user_id => current_user.id)
+    # @reviews = Review.where(:user_id => current_user.id)
+
+    review_cache_key = Review.where(:user_id => current_user.id).cache_key_with_version
+    @reviews = Rails.cache.fetch("my_reviews/#{review_cache_key}") do
+      Review.where(:user_id => current_user.id)
+    end
 
   end
 
@@ -47,6 +58,10 @@ class ReviewController < ApplicationController
 
     if @review.save!
       flash.alert = "Review created successfully!"
+
+      review_cache_key = @review.cache_key_with_version
+      @review = Rails.cache.write("review/#{review_cache_key}", @review)
+
       redirect_to @review
     else
       flash.alert = "Review creation failed!"
@@ -60,8 +75,16 @@ class ReviewController < ApplicationController
   end
 
   def update
-    @review = Review.where(:id => params[:id]).first
+    # @review = Review.where(:id => params[:id]).first
+
+    review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
+    @review = Rails.cache.fetch("review/#{review_cache_key}") do
+      Review.where(:id => params[:id]).first
+    end
+
     if @review.update(params.require(:review).permit(:body, :instructor_name))
+      @review = Rails.cache.write("review/#{review_cache_key}", @review)
+
       flash.alert = "Review updated successfully!"
       redirect_back(fallback_location: @review)
       # redirect_to @review
@@ -74,9 +97,16 @@ class ReviewController < ApplicationController
   end
 
   def destroy
-    @review = Review.where(:id => params[:id]).first
+    # @review = Review.where(:id => params[:id]).first
+    review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
+    @review = Rails.cache.fetch("review/#{review_cache_key}") do
+      Review.where(:id => params[:id]).first
+    end
+
     if @review.destroy
       flash.alert = "Review deleted successfully!"
+      Rails.cache.delete_matched("review/#{review_cache_key}")
+      
       # redirect_to new_review_path
       redirect_back(fallback_location: new_review_path)
     else
@@ -87,9 +117,19 @@ class ReviewController < ApplicationController
   end
 
   def show
-    @review = Review.where(:id => params[:id]).first
+    # @review = Review.where(:id => params[:id]).first
 
-    @comments = @review.comments.to_a
+    review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
+    @review = Rails.cache.fetch("review/#{review_cache_key}") do
+      Review.where(:id => params[:id]).first
+    end
+
+    # @comments = @review.comments.to_a
+
+    comment_cache_key = @review.comments.to_a.cache_key_with_version
+    @comments = Rails.cache.fetch("comment/#{review_cache_key}/#{comment_cache_key}") do
+      @review.comments.to_a
+    end
 
     # @comment = Comment.new
     # @comment.review_id = @review.id

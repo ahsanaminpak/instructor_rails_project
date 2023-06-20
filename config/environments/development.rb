@@ -69,4 +69,8 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.cache_store = :mem_cache_store, nil, { size: 64.megabytes, pool_size: 5, pool_timeout: 5}#, username: "ahsan", password: "somepassword"}
+  config.action_controller.perform_caching = true
+
 end

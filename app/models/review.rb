@@ -5,6 +5,6 @@ class Review < ApplicationRecord
     validates :instructor_name, :presence => true
 
 
-    belongs_to :user
+    belongs_to :user, touch: true
     has_many :comments, dependent: :destroy_async
 end
