@@ -60,10 +60,10 @@ class ReviewController < ApplicationController
       flash.alert = "Review created successfully!"
 
       review_cache_key = @review.cache_key_with_version
-      @review = Rails.cache.write("review/#{review_cache_key}", @review)
+      Rails.cache.write("review/#{review_cache_key}", @review)
 
-      # redirect_to @review
-      redirect_to review_path(@review.id)
+      redirect_to @review
+      # redirect_to review_path(@review.id)
     else
       flash.alert = "Review creation failed!"
       puts "something"
@@ -84,7 +84,7 @@ class ReviewController < ApplicationController
     end
 
     if @review.update(params.require(:review).permit(:body, :instructor_name))
-      @review = Rails.cache.write("review/#{review_cache_key}", @review)
+      Rails.cache.write("review/#{review_cache_key}", @review)
 
       flash.alert = "Review updated successfully!"
       redirect_back(fallback_location: @review)
