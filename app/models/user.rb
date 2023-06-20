@@ -7,5 +7,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy_async
   has_many :comments, dependent: :destroy_async
 
+  validates :account_type, :inclusion => { :in => ["0", "1", "2"] }
+
   
 end
