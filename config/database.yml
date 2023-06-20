@@ -24,7 +24,7 @@ default: &defaultprod
 
 
 # SCALINGO_MYSQL_URL=mysql://reviews_app_1412:PHU4Cbq9T3ow6WXm0KX4@8efba076-a1e0-43fd-a79b-428ba159d026.reviews-app-1412.mysql.a.osc-fr1.scalingo-dbs.com:30215/reviews_app_1412?useSSL=true&verifyServerCertificate=false
-my-app-3030.mysql
+# my-app-3030.mysql
 
 development:
   <<: *default
