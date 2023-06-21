@@ -38,29 +38,29 @@ class ReviewController < ApplicationController
     #   redirect_to new_review_path
     # end
 
-    @review = current_user.reviews.new(:body => params[:review][:body], :instructor_name => params[:review][:instructor_name])
+    review = current_user.reviews.new(:body => params[:review][:body], :instructor_name => params[:review][:instructor_name])
 
     # if !@review.valid?
     #   flash.alert = "All fields are required. Please fill them to continue."
     # end
 
-    if @review.instructor_name == ""
-      flash.alert = @review.errors.full_messages[0]
+    if review.instructor_name == ""
+      flash.alert = review.errors.full_messages[0]
 # 8     render :new
       # flash.alert = "Instructor name cannot be empty."
       puts "here"
       redirect_to new_review_path, notice: "Ins cannot be empty."
     
-    elsif @review.body == ""
+    elsif review.body == ""
       flash.alert = "Review body cannot be empty."
       redirect_to new_review_path
     end
 
-    if @review.save!
+    if review.save!
       flash.alert = "Review created successfully!"
 
-      review_cache_key = @review.cache_key_with_version
-      Rails.cache.write("review/#{review_cache_key}", @review)
+      review_cache_key = review.cache_key_with_version
+      Rails.cache.write("review/#{review_cache_key}", review)
 
       redirect_to @review
       # redirect_to review_path(@review.id)
@@ -79,19 +79,19 @@ class ReviewController < ApplicationController
     # @review = Review.where(:id => params[:id]).first
 
     review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
-    @review = Rails.cache.fetch("review/#{review_cache_key}") do
+    review = Rails.cache.fetch("review/#{review_cache_key}") do
       Review.where(:id => params[:id]).first
     end
 
-    if @review.update(params.require(:review).permit(:body, :instructor_name))
-      Rails.cache.write("review/#{review_cache_key}", @review)
+    if review.update(params.require(:review).permit(:body, :instructor_name))
+      Rails.cache.write("review/#{review_cache_key}", @eview)
 
       flash.alert = "Review updated successfully!"
-      redirect_back(fallback_location: @review)
+      redirect_back(fallback_location: review)
       # redirect_to @review
     else
       flash.alert = "Review update failed!"
-      redirect_back(fallback_location: @review)
+      redirect_back(fallback_location: review)
       # redirect_to new_review_path
     end
 
@@ -100,11 +100,11 @@ class ReviewController < ApplicationController
   def destroy
     # @review = Review.where(:id => params[:id]).first
     review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
-    @review = Rails.cache.fetch("review/#{review_cache_key}") do
+    review = Rails.cache.fetch("review/#{review_cache_key}") do
       Review.where(:id => params[:id]).first
     end
 
-    if @review.destroy
+    if review.destroy
       flash.alert = "Review deleted successfully!"
       # Rails.cache.delete_matched("review/#{review_cache_key}")
       
@@ -113,7 +113,7 @@ class ReviewController < ApplicationController
     else
       flash.alert = "Review deletion failed!"
       # redirect_to @review
-      redirect_back(fallback_location: @review)
+      redirect_back(fallback_location: review)
     end
   end
 

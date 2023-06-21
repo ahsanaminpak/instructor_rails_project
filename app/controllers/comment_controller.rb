@@ -26,12 +26,12 @@ class CommentController < ApplicationController
     # Rails.cache.clear # remove
 
     comment_cache_key = Comment.where(:id => params[:id]).first.cache_key_with_version
-    @comment = Rails.cache.fetch("comment/#{comment_cache_key}") do
+    comment = Rails.cache.fetch("comment/#{comment_cache_key}") do
       Comment.where(:id => params[:id]).first
     end
 
-    if @comment.update(params.require(:comment).permit(:body))
-      Rails.cache.write("comment/#{comment_cache_key}", @comment)
+    if comment.update(params.require(:comment).permit(:body))
+      Rails.cache.write("comment/#{comment_cache_key}", comment)
 
       flash.alert = "Comment updated successfully!"
       # redirect_to review_path(params[:review_id])
