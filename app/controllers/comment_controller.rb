@@ -6,11 +6,11 @@ class CommentController < ApplicationController
 
   def create
     review = Review.where(:id => params[:review_id]).first
-    @comment = review.comments.new(:body => params[:comment][:body], :user_id => current_user.id)
+    comment = review.comments.new(:body => params[:comment][:body], :user_id => current_user.id)
 
-    if @comment.save!
-      comment_cache_key = @comment.cache_key_with_version
-      Rails.cache.write("comment/#{comment_cache_key}", @comment)
+    if comment.save!
+      comment_cache_key = comment.cache_key_with_version
+      Rails.cache.write("comment/#{comment_cache_key}", comment)
 
       flash.alert = "Comment created successfully!"
       redirect_to review_path(params[:review_id])
