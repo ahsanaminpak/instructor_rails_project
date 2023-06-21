@@ -25,10 +25,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def search
-    @result = User.search("ahsan")
-    @res = @result.records.first
-    puts @result
-    puts @res
+    # @result = User.search("ahsan")
+    # @res = @result.records.first
+
+    @result = User.search('ahsan').records.first
+    # puts @result
+    # puts @res
   end
 
   # protected
