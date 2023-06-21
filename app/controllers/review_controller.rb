@@ -127,7 +127,8 @@ class ReviewController < ApplicationController
 
     # @comments = @review.comments.to_a
 
-    comment_cache_key = @review.comments.to_a.cache_key_with_version
+    # comment_cache_key = @review.comments.to_a.cache_key_with_version
+    comment_cache_key = @review.comments.cache_key_with_version
     @comments = Rails.cache.fetch("comment/#{review_cache_key}/#{comment_cache_key}") do
       @review.comments.to_a
     end
