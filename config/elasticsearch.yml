@@ -24,4 +24,5 @@ production:
     request:
       timeout: !!integer 500
 
+Elasticsearch::Model.client = Elasticsearch::Client.new(config)
 # SCALINGO_ELASTICSEARCH_URL=http://reviews-app-6214:OihP8MSNd0nPyvgyHRXh@reviews-app-6214.elasticsearch.a.osc-fr1.scalingo-dbs.com:30248
