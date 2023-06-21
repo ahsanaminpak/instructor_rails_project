@@ -17,7 +17,7 @@ module Searchable
   
   private
   def index_document
-    __elasticsearch__.create_index!
+    # __elasticsearch__.create_index!
     __elasticsearch__.index_document
   end
 end
