@@ -1,5 +1,9 @@
 search results are...
 
+<%if !@users.present? && @reviews.present? && @comments.present?%>
+<b>No matching results!</b>
+<%end%>
+
 <%if @users.present?%>
 <br>
 <b>Users</b><br>
