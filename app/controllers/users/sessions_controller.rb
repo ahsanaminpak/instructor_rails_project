@@ -25,6 +25,15 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def search
+    # @result = User.search("ahsan")
+    # @res = @result.records.first
+
+    @result = User.search('ahsan').records.to_a.first
+
+    @name = @result.name
+    @dept = @result.department
+    @bio = @result.bio 
+
     redirect_to users_sessions_search_results_path
     
   end
