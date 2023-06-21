@@ -28,9 +28,9 @@ class Users::SessionsController < Devise::SessionsController
     # @result = User.search("ahsan")
     # @res = @result.records.first
 
-    @users = User.search(params[:input]).records.first
-    @reviews = Review.search(params[:input]).records.first
-    @comments = Comment.search(params[:input]).records.first
+    @users = User.search(params[:input]).records.to_a
+    @reviews = Review.search(params[:input]).records.to_a
+    @comments = Comment.search(params[:input]).records.to_a
 
 
 
