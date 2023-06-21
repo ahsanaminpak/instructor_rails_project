@@ -10,7 +10,7 @@ class CommentController < ApplicationController
 
     if comment.save!
       comment_cache_key = comment.cache_key_with_version
-      Rails.cache.write("comment/#{comment_cache_key}", comment)
+      # Rails.cache.write("comment/#{comment_cache_key}", comment)
 
       flash.alert = "Comment created successfully!"
       redirect_to review_path(params[:review_id])
@@ -26,13 +26,14 @@ class CommentController < ApplicationController
     # Rails.cache.clear # remove
 
     comment_cache_key = Comment.where(:id => params[:id]).first.cache_key_with_version
-    comment = Rails.cache.fetch("comment/#{comment_cache_key}") do
-      Comment.where(:id => params[:id]).first
-    end
+    # comment = Rails.cache.fetch("comment/#{comment_cache_key}") do
+    #   Comment.where(:id => params[:id]).first
+    # end
+    comment = Comment.where(:id => params[:id]).first
 
     if comment.update(params.require(:comment).permit(:body))
       comment_cache_key = comment.cache_key_with_version
-      Rails.cache.write("comment/#{comment_cache_key}", comment)
+      # Rails.cache.write("comment/#{comment_cache_key}", comment)
 
       flash.alert = "Comment updated successfully!"
       # redirect_to review_path(params[:review_id])
@@ -50,9 +51,11 @@ class CommentController < ApplicationController
     # comment = Comment.where(:id => params[:id]).first
 
     comment_cache_key = Comment.where(:id => params[:id]).first.cache_key_with_version
-    comment = Rails.cache.fetch("comment/#{comment_cache_key}") do
-      Comment.where(:id => params[:id]).first
-    end
+    # comment = Rails.cache.fetch("comment/#{comment_cache_key}") do
+    #   Comment.where(:id => params[:id]).first
+    # end
+
+    comment = Comment.where(:id => params[:id]).first
 
     if comment.destroy
       # Rails.cache.delete_matched("comment/#{comment_cache_key}")
