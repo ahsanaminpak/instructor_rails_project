@@ -84,7 +84,8 @@ class ReviewController < ApplicationController
     end
 
     if review.update(params.require(:review).permit(:body, :instructor_name))
-      Rails.cache.write("review/#{review_cache_key}", @eview)
+      review_cache_key = review.cache_key_with_version
+      Rails.cache.write("review/#{review_cache_key}", review)
 
       flash.alert = "Review updated successfully!"
       redirect_back(fallback_location: review)

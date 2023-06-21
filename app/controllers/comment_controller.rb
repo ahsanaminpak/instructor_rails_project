@@ -31,6 +31,7 @@ class CommentController < ApplicationController
     end
 
     if comment.update(params.require(:comment).permit(:body))
+      comment_cache_key = comment.cache_key_with_version
       Rails.cache.write("comment/#{comment_cache_key}", comment)
 
       flash.alert = "Comment updated successfully!"
