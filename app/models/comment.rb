@@ -4,4 +4,10 @@ class Comment < ApplicationRecord
     
     belongs_to :user, touch: true
     belongs_to :review, touch: true
+
+    settings index: { number_of_shards: 1 } do
+        mappings dynamic: 'false' do
+          indexes :body
+        end
+    end
 end
