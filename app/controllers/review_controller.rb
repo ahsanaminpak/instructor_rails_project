@@ -113,8 +113,8 @@ class ReviewController < ApplicationController
       flash.alert = "Review deleted successfully!"
       # Rails.cache.delete_matched("review/#{review_cache_key}")
       
-      # redirect_to new_review_path
-      redirect_back(fallback_location: new_review_path)
+      redirect_to new_review_path
+      # redirect_back(fallback_location: new_review_path)
     else
       flash.alert = "Review deletion failed!"
       # redirect_to @review
