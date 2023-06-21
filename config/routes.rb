@@ -16,14 +16,16 @@ Rails.application.routes.draw do
   get "/review/my_reviews", 'review#my_reviews'
   get "/comment/my_comments", 'comment#my_comments'
 
-  devise_scope :user do
-    post 'users/sessions/search', :to => 'devise/sessions#search'
-    get 'users/sessions/search_results', :to => 'devise/sessions#search_results'
-  end
+  # devise_scope :user do
+  #   post 'users/sessions/search', :to => 'devise/sessions#search'
+  #   get 'users/sessions/search_results', :to => 'devise/sessions#search_results'
+  # end
 
   devise_scope :user do
     authenticated :user do
       root 'devise/sessions#index', as: :authenticated_root
+      post 'users/sessions/search', :to => 'devise/sessions#search'
+      get 'users/sessions/search_results', :to => 'devise/sessions#search_results'
     end
   
     unauthenticated do
