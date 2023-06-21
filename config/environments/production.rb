@@ -95,8 +95,10 @@ Rails.application.configure do
   # config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
   config.cache_store = :redis_cache_store, { url: 'redis://:HSKQnPqez-fMg_lf5uXG@reviews-app-316.redis.a.osc-fr1.scalingo-dbs.com:32005/0' }
 
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
   # SCALINGO_REDIS_URL=redis://:HSKQnPqez-fMg_lf5uXG@reviews-app-316.redis.a.osc-fr1.scalingo-dbs.com:32005
 
-  config.action_controller.perform_caching = true
+  # config.action_controller.perform_caching = true
 
 end
