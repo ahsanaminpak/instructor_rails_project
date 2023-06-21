@@ -7,6 +7,7 @@ result: <%=@reviews%>
 result: <%=@comments%>
 
 
+<%if @users.present?%>
 <br>
 <b>Users</b>
 <% @users.each do |item| %>
@@ -14,16 +15,22 @@ result: <%=@comments%>
   item.email<br>
   item.department<br><br>
 <% end %>
+<%end%>
 
+<%if @reviews.present?%>
 <br>
 <b>Reviews</b>
 <% @reviews.each do |item| %>
   item.body<br>
   item.instructor_name<br><br>
 <% end %>
+<% end %>
 
+
+<%if @comments.present?%>
 <br>
 <b>Comments</b>
 <% @comments.each do |item| %>
   item.body<br>
+<% end %>
 <% end %>
