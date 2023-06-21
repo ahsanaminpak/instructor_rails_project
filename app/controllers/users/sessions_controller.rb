@@ -24,6 +24,13 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def search
+  end
+
+  def search_results
+
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
