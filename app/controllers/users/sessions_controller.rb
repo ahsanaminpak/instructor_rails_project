@@ -25,7 +25,10 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def search
-    @result = User.search("ahsan").records
+    @result = User.search("ahsan")
+    @res = @result.records.first
+    puts @result
+    puts @res
   end
 
   # protected
