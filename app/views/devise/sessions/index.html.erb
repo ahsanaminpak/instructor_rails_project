@@ -19,4 +19,9 @@ Bio: <%= current_user.bio%><br>
 
 <%= button_to "My comments", comment_my_comments_path, method: :get %><br>
 
+<%= form_tag(users_sessions_search_path) do %>
+    <div><%= text_field_tag :input %></div>
+    <div><%= submit_tag 'Search' %></div>
+<% end %>
+
 <%= button_to "Logout", destroy_user_session_path, method: :delete %>
