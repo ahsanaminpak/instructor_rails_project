@@ -19,4 +19,6 @@ Bio: <%= current_user.bio%><br>
 
 <%= button_to "My comments", comment_my_comments_path, method: :get %><br>
 
+<%= button_to "Search", users_sessions_search_path, method: :get %><br>
+
 <%= button_to "Logout", destroy_user_session_path, method: :delete %>

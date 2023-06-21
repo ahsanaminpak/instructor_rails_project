@@ -25,7 +25,7 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def search
-    @result = ""
+    @result = User.search("ahsan").records
   end
 
   # protected

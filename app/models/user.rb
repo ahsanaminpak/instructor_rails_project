@@ -12,7 +12,7 @@ class User < ApplicationRecord
   include Searchable
 
   settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'true' do
+    mappings dynamic: 'false' do
       indexes :name
       indexes :email
     end
