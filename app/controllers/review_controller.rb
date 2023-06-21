@@ -5,11 +5,11 @@ class ReviewController < ApplicationController
   def index
     # @reviews = Review.all
 
-    review_cache_key = Review.all.cache_key_with_version
+    # review_cache_key = Review.all.cache_key_with_version
     # @reviews = Rails.cache.fetch("all_reviews/#{review_cache_key}") do
     #   Review.all
     # end
-    @review = Review.all
+    @reviews = Review.all
 
   end
 
