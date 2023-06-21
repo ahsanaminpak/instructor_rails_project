@@ -76,3 +76,6 @@ end
 gem "dalli", "~> 3.2"
 
 gem 'connection_pool'
+
+gem "elasticsearch-model"
+gem "elasticsearch-rails"
