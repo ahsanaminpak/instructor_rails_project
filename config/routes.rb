@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post 'users/sessions/search', :to => 'devise/sessions#search'
-    post 'users/sessions/search_results', :to => 'devise/sessions#search_results'
+    get 'users/sessions/search_results', :to => 'devise/sessions#search_results'
   end
 
   devise_scope :user do

@@ -25,6 +25,8 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def search
+    redirect_to users_sessions_search_results_path
+    
   end
 
   def search_results
