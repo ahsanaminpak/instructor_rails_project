@@ -125,16 +125,21 @@ class ReviewController < ApplicationController
   def show
     # @review = Review.where(:id => params[:id]).first
 
-    review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
+    # review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
     # @review = Rails.cache.fetch("review/#{review_cache_key}") do
     #   Review.where(:id => params[:id]).first
     # end
     @review = Review.where(:id => params[:id]).first
 
+    unless @review
+      redirect_back(fallback_location: new_review_path)
+    end
+
+
     @comments = @review.comments.to_a
 
 
-    comment_cache_key = @review.comments.cache_key_with_version
+    # comment_cache_key = @review.comments.cache_key_with_version
     # @comments = Rails.cache.fetch("comment/#{review_cache_key}/#{comment_cache_key}") do
     #   @review.comments.to_a
     # end
