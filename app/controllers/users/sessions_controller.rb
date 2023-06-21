@@ -34,17 +34,17 @@ class Users::SessionsController < Devise::SessionsController
     @dept = @result.department
     @bio = @result.bio 
 
-    redirect_to users_sessions_search_results_path
+    # redirect_to users_sessions_search_results_path
     
   end
 
   def search_results
 
-    @result = User.search('ahsan').records.first
+    # @result = User.search('ahsan').records.first
 
-    @name = @result.name
-    @dept = @result.department
-    @bio = @result.bio 
+    # @name = @result.name
+    # @dept = @result.department
+    # @bio = @result.bio 
 
   end
 
