@@ -70,7 +70,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.cache_store = :mem_cache_store, nil, { size: 64.megabytes, pool_size: 5, pool_timeout: 5}#, username: "ahsan", password: "somepassword"}
+  # config.cache_store = :mem_cache_store, nil, { size: 64.megabytes, pool_size: 5, pool_timeout: 5}#, username: "ahsan", password: "somepassword"}
+  config.cache_store = :redis_cache_store, { url: 'redis://:HSKQnPqez-fMg_lf5uXG@reviews-app-316.redis.a.osc-fr1.scalingo-dbs.com:32005/0' }
   config.action_controller.perform_caching = true
 
 end
