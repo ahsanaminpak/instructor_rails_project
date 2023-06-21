@@ -28,14 +28,14 @@ class Users::SessionsController < Devise::SessionsController
     # @result = User.search("ahsan")
     # @res = @result.records.first
 
-    # @result = User.search('ahsan').records.first
+    @result = User.search(params[:input]).records.first
 
-    # @name = @result.name
-    # @dept = @result.department
-    # @bio = @result.bio 
+    @name = @result.name
+    @dept = @result.department
+    @bio = @result.bio 
 
-    # render :search
-    redirect_to users_sessions_search_results_path(input: params[:input])
+
+    # redirect_to users_sessions_search_results_path
     
   end
 
