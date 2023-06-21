@@ -34,6 +34,7 @@ class Users::SessionsController < Devise::SessionsController
     @dept = @result.department
     @bio = @result.bio 
 
+    render :search
     # redirect_to users_sessions_search_results_path
     
   end
