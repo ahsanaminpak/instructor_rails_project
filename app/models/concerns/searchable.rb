@@ -8,7 +8,7 @@ module Searchable
 
     after_commit :index_document, if: :persisted?
     after_commit on: [:destroy] do
-      __elasticsearch__.delete_document ignore: 404
+      # __elasticsearch__.delete_document ignore: 404
       # __elasticsearch__.refresh_index!
     end
   end
