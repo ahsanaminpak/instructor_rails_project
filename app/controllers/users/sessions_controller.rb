@@ -28,7 +28,11 @@ class Users::SessionsController < Devise::SessionsController
     # @result = User.search("ahsan")
     # @res = @result.records.first
 
-    @result = User.search('ahsan').records.first
+    @result = User.search('ahsan').records.to_a.first
+
+    @name = @result.name
+    @dept = @result.department
+    @bio = @result.bio 
     # puts @result
     # puts @res
   end
