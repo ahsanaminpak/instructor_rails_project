@@ -76,3 +76,7 @@ end
 gem "dalli", "~> 3.2"
 
 gem 'connection_pool'
+
+gem 'redis'
+
+gem 'hiredis'

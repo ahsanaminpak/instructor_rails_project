@@ -91,7 +91,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.cache_store = :mem_cache_store, { size: 64.megabytes, pool_size: 5, pool_timeout: 5}#, username: "ahsan", password: "somepassword"}
+  # config.cache_store = :mem_cache_store, { size: 64.megabytes, pool_size: 5, pool_timeout: 5}#, username: "ahsan", password: "somepassword"}
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
+  
   config.action_controller.perform_caching = true
 
 end

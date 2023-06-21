@@ -99,6 +99,7 @@ GEM
     erubi (1.12.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    hiredis (0.6.3)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.6)
@@ -175,6 +176,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.14.1)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.3.5)
       io-console (~> 0.5)
@@ -234,11 +239,13 @@ DEPENDENCIES
   dalli (~> 3.2)
   debug
   devise
+  hiredis
   importmap-rails
   jbuilder
   mysql2
   puma (~> 5.0)
   rails (~> 7.0.5)
+  redis
   selenium-webdriver
   sprockets-rails
   stimulus-rails
