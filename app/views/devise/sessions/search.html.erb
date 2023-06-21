@@ -2,28 +2,28 @@ search results are...
 
 <%if @users.present?%>
 <br>
-<b>Users</b>
+<b>Users</b><br>
 <% @users.each do |item| %>
-  <%=item.name%><br>
-  <%=item.email%><br>
-  <%=item.department%><br><br>
+  Name:<%=item.name%><br>
+  Email:<%=item.email%><br>
+  Dept:<%=item.department%><br><br>
 <% end %>
 <%end%>
 
 <%if @reviews.present?%>
 <br>
-<b>Reviews</b>
+<b>Reviews</b><br>
 <% @reviews.each do |item| %>
-  <%=item.body%><br>
-  <%=item.instructor_name%><br><br>
+  Instructor name:<%=item.instructor_name%><br>
+  Body:<%=item.body%><br><br>
 <% end %>
 <% end %>
 
 
 <%if @comments.present?%>
 <br>
-<b>Comments</b>
+<b>Comments</b><br>
 <% @comments.each do |item| %>
-  <%=item.body%><br>
+  Comment body:<%=item.body%><br>
 <% end %>
 <% end %>
