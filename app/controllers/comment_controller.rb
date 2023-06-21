@@ -23,6 +23,7 @@ class CommentController < ApplicationController
 
   def update
     # comment = Comment.where(:id => params[:id]).first
+    Rails.cache.clear
 
     comment_cache_key = Comment.where(:id => params[:id]).first.cache_key_with_version
     @comment = Rails.cache.fetch("comment/#{comment_cache_key}") do
