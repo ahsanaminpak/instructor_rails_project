@@ -7,10 +7,10 @@ class Comment < ApplicationRecord
 
     include Searchable
 
-    settings index: { number_of_shards: 1 } do
-      mappings dynamic: 'false' do
-        indexes :body
-      end
-    end
+    # settings index: { number_of_shards: 1 } do
+    #   mappings dynamic: 'false' do
+    #     indexes :body
+    #   end
+    # end
 
 end
