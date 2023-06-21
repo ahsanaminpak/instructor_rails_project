@@ -5,3 +5,25 @@ search results here...
 result: <%=@users%>
 result: <%=@reviews%>
 result: <%=@comments%>
+
+
+<br>
+<b>Users</b>
+<% @users.each do |item| %>
+  item.name<br>
+  item.email<br>
+  item.department<br><br>
+<% end %>
+
+<br>
+<b>Reviews</b>
+<% @reviews.each do |item| %>
+  item.body<br>
+  item.instructor_name<br><br>
+<% end %>
+
+<br>
+<b>Comments</b>
+<% @comments.each do |item| %>
+  item.body<br>
+<% end %>
