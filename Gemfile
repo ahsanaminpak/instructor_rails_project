@@ -80,3 +80,7 @@ gem 'connection_pool'
 gem 'redis'
 
 gem 'hiredis'
+
+gem 'elasticsearch-rails'
+
+gem 'elasticsearch-model'

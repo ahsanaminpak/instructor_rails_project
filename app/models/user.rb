@@ -9,5 +9,14 @@ class User < ApplicationRecord
 
   validates :account_type, :inclusion => { :in => [0, 1, 2] }
 
+  include Searchable
+
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :name
+      indexes :email
+    end
+  end
+
   
 end
