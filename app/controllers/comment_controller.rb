@@ -53,7 +53,7 @@ class CommentController < ApplicationController
     end
 
     if comment.destroy
-      Rails.cache.delete_matched("comment/#{comment_cache_key}")
+      # Rails.cache.delete_matched("comment/#{comment_cache_key}")
 
       flash.alert = "Comment deleted successfully!"
       # redirect_to review_path(params[:review_id])
