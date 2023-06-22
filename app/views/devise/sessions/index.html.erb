@@ -1,0 +1,22 @@
+
+Name: <%= current_user.name%><br>
+
+Email: <%= current_user.email%><br>
+
+Department: <%= current_user.department%><br>
+
+Bio: <%= current_user.bio%><br>
+
+
+
+<%if current_user.account_type != 2%>
+<%= link_to 'Create Review', new_review_path, method: :get%><br>
+<%= button_to "My reviews", review_my_reviews_path, method: :get %><br>
+<%end%>
+
+<%= button_to "All reviews", review_index_path, method: :get %><br>
+
+
+<%= button_to "My comments", comment_my_comments_path, method: :get %><br>
+
+<%= button_to "Logout", destroy_user_session_path, method: :delete %>
