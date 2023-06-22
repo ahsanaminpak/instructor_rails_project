@@ -1,0 +1,65 @@
+<h1>Review#show</h1>
+<p>Find me in app/views/review/show.html.erb</p>
+
+<% flash.first do |type, msg| %>
+  <div class="alert alert-info">
+    <%= type %>: <%= msg %>
+  </div>
+<% end %>
+
+
+<%= button_to "Log out", destroy_user_session_path, method: :delete %><br><br>
+
+Review_id:<%= @review.id%><br>
+
+Instructor name:<%= @review.instructor_name%><br>
+
+Content of Review:<%= @review.body%><br>
+
+User_id of reviewer:<%= @review.user_id%><br>
+
+<%= link_to "Edit", edit_review_path(@review.id)%><br>
+
+<%unless current_user.account_type.to_i == 2%>
+<%= button_to "Delete", review_path(@review.id), method: :delete %>
+<%end%>
+<br><br>
+
+<%@comments.each do |c| %>
+<%if c.user_id == current_user.id%>
+
+<%= form_for(c, url: review_comment_path(@review.id, c.id), method: :put) do |f| %>
+
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_field :body, autocomplete: "new-review" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Edit comment" %>
+  </div>
+<% end %>
+
+
+<%= button_to "Delete comment", review_comment_path(@review.id, c.id), method: :delete %>
+<br><br>
+
+<%else%>
+Commenter ID: <%=c.user_id%><br>
+comment body: <%=c.body%><br><br>
+<%end%>
+
+<%end%>
+
+
+<%= form_for(:comment, url: review_comment_index_path(@review), method: :post) do |f| %>
+
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_field :body, autocomplete: "new-review" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Add comment" %>
+  </div>
+<% end %>

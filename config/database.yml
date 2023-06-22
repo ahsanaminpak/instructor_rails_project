@@ -13,6 +13,18 @@ default: &default
   username: ahsan
   password: 'ahsan1313'
 
+default: &defaultprod
+  adapter: mysql2
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: reviews_app_1412
+  password: 'PHU4Cbq9T3ow6WXm0KX4'
+  host: 8efba076-a1e0-43fd-a79b-428ba159d026.reviews-app-1412.mysql.a.osc-fr1.scalingo-dbs.com
+  port: 30215
+
+
+# SCALINGO_MYSQL_URL=mysql://reviews_app_1412:PHU4Cbq9T3ow6WXm0KX4@8efba076-a1e0-43fd-a79b-428ba159d026.reviews-app-1412.mysql.a.osc-fr1.scalingo-dbs.com:30215/reviews_app_1412?useSSL=true&verifyServerCertificate=false
+# my-app-3030.mysql
 
 development:
   <<: *default
@@ -26,8 +38,9 @@ test:
   database: testInstructorReviews
 
 production:
-  <<: *default
-  database: prodInstructorReviews
+  <<: *defaultprod
+  database: reviews_app_1412
+  # database: prodInstructorReviews
 
 
 

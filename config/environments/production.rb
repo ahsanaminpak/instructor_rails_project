@@ -90,4 +90,15 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # config.cache_store = :mem_cache_store, { size: 64.megabytes, pool_size: 5, pool_timeout: 5}#, username: "ahsan", password: "somepassword"}
+  # config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
+  config.cache_store = :redis_cache_store, { url: 'redis://:HSKQnPqez-fMg_lf5uXG@reviews-app-316.redis.a.osc-fr1.scalingo-dbs.com:32005/0' }
+
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
+  # SCALINGO_REDIS_URL=redis://:HSKQnPqez-fMg_lf5uXG@reviews-app-316.redis.a.osc-fr1.scalingo-dbs.com:32005
+
+  # config.action_controller.perform_caching = true
+
 end

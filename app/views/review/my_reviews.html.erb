@@ -1,0 +1,34 @@
+my reviews
+
+<% flash.first do |type, msg| %>
+  <div>
+    <%= type %>: <%= msg %>
+  </div>
+<% end %>
+
+<%@reviews.each do |r| %>
+
+<%= form_for(r, url: review_path(r.id), method: :put) do |f| %>
+
+
+  <div>
+    <%= f.label :instructor_name %><br />
+    instructor name: <%= f.text_field :instructor_name, autocomplete: "new-instructor" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :review %><br />
+    review body: <%= f.text_field :body, autocomplete: "new-review" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Edit review" %>
+  </div>
+<% end %>
+
+
+<%= button_to "Delete review", review_path(r.id), method: :delete %>
+
+<%= button_to "Show review", review_path(r.id), method: :get %>
+<br><br>
+<%end%>

@@ -1,0 +1,33 @@
+search results are...
+
+<%if !@users.present? && @reviews.present? && @comments.present?%>
+<b>No matching results!</b>
+<%end%>
+
+<%if @users.present?%>
+<br>
+<b>Users</b><br>
+<% @users.each do |item| %>
+  Name:<%=item.name%><br>
+  Email:<%=item.email%><br>
+  Dept:<%=item.department%><br><br>
+<% end %>
+<%end%>
+
+<%if @reviews.present?%>
+<br>
+<b>Reviews</b><br>
+<% @reviews.each do |item| %>
+  Instructor name:<%=item.instructor_name%><br>
+  Body:<%=item.body%><br><br>
+<% end %>
+<% end %>
+
+
+<%if @comments.present?%>
+<br>
+<b>Comments</b><br>
+<% @comments.each do |item| %>
+  Comment body:<%=item.body%><br>
+<% end %>
+<% end %>

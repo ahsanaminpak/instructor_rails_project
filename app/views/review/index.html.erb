@@ -1,0 +1,41 @@
+all reviews
+
+<% flash.first do |type, msg| %>
+  <div>
+    <%= type %>: <%= msg %>
+  </div>
+<% end %>
+
+
+<%@reviews.each do |r| %>
+<%if r.user_id == current_user.id%>
+
+<%= form_for(r, url: review_path(r.id), method: :put) do |f| %>
+
+  <div>
+    <%= f.label :instructor_name %><br />
+    instructor name: <%= f.text_field :instructor_name, autocomplete: "new-instructor" %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    review body: <%= f.text_field :body, autocomplete: "new-review" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update review" %>
+  </div>
+<% end %>
+
+
+<%= button_to "Delete review", review_path(r.id), method: :delete %>
+
+
+<%else%>
+reviewer ID: <%=r.user_id%><br>
+instructor name: <%=r.instructor_name%><br><br>
+review body: <%=r.body%><br><br>
+<%end%>
+
+<%= button_to "Show review", review_path(r.id), method: :get %><br><br>
+
+<%end%>

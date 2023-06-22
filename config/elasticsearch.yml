@@ -1,0 +1,28 @@
+development: &default
+  host: 'http://localhost:9200/'
+  transport_options:
+    request:
+      timeout: !!integer 300
+
+
+
+test:
+  <<: *default
+
+  
+staging:
+  <<: *default
+
+
+
+production:
+  host: 'reviews-app-6214.elasticsearch.a.osc-fr1.scalingo-dbs.com'
+  port: 30248
+  username: reviews-app-6214
+  password: OihP8MSNd0nPyvgyHRXh
+  transport_options:
+    request:
+      timeout: !!integer 500
+
+Elasticsearch::Model.client = Elasticsearch::Client.new(config)
+# SCALINGO_ELASTICSEARCH_URL=http://reviews-app-6214:OihP8MSNd0nPyvgyHRXh@reviews-app-6214.elasticsearch.a.osc-fr1.scalingo-dbs.com:30248

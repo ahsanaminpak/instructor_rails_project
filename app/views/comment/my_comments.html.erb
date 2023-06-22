@@ -1,0 +1,29 @@
+my comments here
+
+<% flash.first do |type, msg| %>
+  <div>
+    <%= type %>: <%= msg %>
+  </div>
+<% end %>
+
+<%@comments.each do |c| %>
+
+<%= form_for(c, url: review_comment_path(c.review_id, c.id), method: :put) do |f| %>
+
+  <div class="field">
+    <%= f.label :comment %><br />
+    comment body: <%= f.text_field :body, autocomplete: "new-comment" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Edit comment" %>
+  </div>
+<% end %>
+
+
+<%= button_to "Delete comment", review_comment_path(c.review_id, c.id), method: :delete %><br>
+
+<%= button_to "Show review", review_path(c.review_id), method: :get %>
+
+<br><br>
+<%end%>
