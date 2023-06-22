@@ -1,5 +1,5 @@
 class ReviewController < ApplicationController
-  before_action :check_instructor, except: :index
+  before_action :check_instructor, except: [:index, :show]
 
 
   def index
