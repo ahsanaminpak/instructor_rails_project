@@ -6,7 +6,7 @@ class ReviewController < ApplicationController
     # @reviews = Review.all
 
     review_cache_key = Review.all.cache_key_with_version
-    @reviews = Rails.cache.fetch("all_reviews/#{review_cache_key}") do
+    @reviews = Rails.cache.fetch("all_reviews/#{review_cache_key}", expires_in: 1.minutes) do
       Review.all.to_a
     end
     # @reviews = Review.all
@@ -17,7 +17,7 @@ class ReviewController < ApplicationController
     # @reviews = Review.where(:user_id => current_user.id)
 
     review_cache_key = Review.where(:user_id => current_user.id).cache_key_with_version
-    @reviews = Rails.cache.fetch("my_reviews/#{review_cache_key}") do
+    @reviews = Rails.cache.fetch("my_reviews/#{review_cache_key}", expires_in: 1.minutes) do
       Review.where(:user_id => current_user.id).to_a
     end
 
@@ -50,7 +50,7 @@ class ReviewController < ApplicationController
       flash.alert = "Review created successfully!"
 
       review_cache_key = review.cache_key_with_version
-      Rails.cache.write("review/#{review_cache_key}", review)
+      Rails.cache.write("review/#{review_cache_key}", review, expires_in: 1.minutes)
 
       redirect_to review
       # redirect_to review_path(@review.id)
@@ -65,7 +65,7 @@ class ReviewController < ApplicationController
     # @review = Review.where(:id => params[:id]).first
 
     review_cache_key = Review.where(:user_id => current_user.id).first.cache_key_with_version
-    @review = Rails.cache.fetch("review/#{review_cache_key}") do
+    @review = Rails.cache.fetch("review/#{review_cache_key}", expires_in: 1.minutes) do
       Review.where(:id => params[:id]).first
     end
 
@@ -75,7 +75,7 @@ class ReviewController < ApplicationController
     # @review = Review.where(:id => params[:id]).first
 
     review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
-    review = Rails.cache.fetch("review/#{review_cache_key}") do
+    review = Rails.cache.fetch("review/#{review_cache_key}", expires_in: 1.minutes) do
       Review.where(:id => params[:id]).first
     end
 
@@ -83,7 +83,7 @@ class ReviewController < ApplicationController
 
     if review.update(params.require(:review).permit(:body, :instructor_name))
       review_cache_key = review.cache_key_with_version
-      Rails.cache.write("review/#{review_cache_key}", review)
+      Rails.cache.write("review/#{review_cache_key}", review, expires_in: 1.minutes)
 
       flash.alert = "Review updated successfully!"
       redirect_back(fallback_location: review)
@@ -99,7 +99,7 @@ class ReviewController < ApplicationController
   def destroy
     # @review = Review.where(:id => params[:id]).first
     review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
-    review = Rails.cache.fetch("review/#{review_cache_key}") do
+    review = Rails.cache.fetch("review/#{review_cache_key}", expires_in: 1.minutes) do
       Review.where(:id => params[:id]).first
     end
     # review = Review.where(:id => params[:id]).first
@@ -121,7 +121,7 @@ class ReviewController < ApplicationController
     # @review = Review.where(:id => params[:id]).first
 
     review_cache_key = Review.where(:id => params[:id]).first.cache_key_with_version
-    @review = Rails.cache.fetch("review/#{review_cache_key}") do
+    @review = Rails.cache.fetch("review/#{review_cache_key}", expires_in: 1.minutes) do
       Review.where(:id => params[:id]).first
     end
     # @review = Review.where(:id => params[:id]).first
@@ -135,7 +135,7 @@ class ReviewController < ApplicationController
 
 
     comment_cache_key = @review.comments.cache_key_with_version
-    @comments = Rails.cache.fetch("comment/#{review_cache_key}/#{comment_cache_key}") do
+    @comments = Rails.cache.fetch("comment/#{review_cache_key}/#{comment_cache_key}", expires_in: 1.minutes) do
       @review.comments.to_a
     end
 
