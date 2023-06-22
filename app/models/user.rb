@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable 
 
-  has_many :reviews, dependent: :destroy_async
-  has_many :comments, dependent: :destroy_async
+  has_many :reviews, dependent: :destroy #, dependent: :destroy_async
+  has_many :comments, dependent: :destroy#, dependent: :destroy_async
 
   validates :account_type, :inclusion => { :in => [0, 1, 2] }
 

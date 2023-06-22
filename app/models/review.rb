@@ -6,7 +6,7 @@ class Review < ApplicationRecord
 
 
     belongs_to :user, touch: true
-    has_many :comments, dependent: :destroy_async
+    has_many :comments, dependent: :destroy # , dependent: :destroy_async
 
     include Searchable
     
